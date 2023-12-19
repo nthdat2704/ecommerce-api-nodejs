@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "target": "ES2015", // target source to compile
+    "module": "CommonJS", //
+    "lib": ["ES2015"], // included lib
+    "baseUrl": "./", // base directory to look files
+    "outDir": "./build", // directory to build files
+    "rootDir": "src",
+    "strict": true,
+    "noImplicitAny": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "forceConsistentCasingInFileNames": true,
+    "allowSyntheticDefaultImports": true,
+    "pretty": true,
+    "resolveJsonModule": true,
+    "strictPropertyInitialization": false,
+    "plugins": [{ "transform": "typescript-transform-paths" }, { "transform": "typescript-transform-paths", "afterDeclarations": true }],
+    "paths": {
+      "@features/*": ["src/features/*"],
+      "@shared/*": ["src/shared/*"],
+      "@/*": ["src/*"]
+    }
+  }
+}
