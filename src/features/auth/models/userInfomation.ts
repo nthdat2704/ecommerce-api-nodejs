@@ -45,6 +45,9 @@ export class UserInfomation {
   @Column('character varying', { name: 'avatar', nullable: true, length: 30 })
   avatar: string | null;
 
+  @Column('character varying', { name: 'refreshToken', nullable: true, length: 255 })
+  refreshToken: string | null;
+
   @OneToMany(() => Orders, (orders) => orders.user)
   orders: Orders[];
 

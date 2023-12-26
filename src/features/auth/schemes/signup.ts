@@ -6,6 +6,12 @@ const signupSchema: ObjectSchema = Joi.object().keys({
     'string.max': 'Invalid username',
     'string.empty': 'Username is a required field'
   }),
+  name: Joi.string().required().min(6).max(32).messages({
+    'string.base': 'name must be of type string',
+    'string.min': 'Invalid name',
+    'string.max': 'Invalid name',
+    'string.empty': 'name is a required field'
+  }),
   password: Joi.string().required().min(6).max(32).messages({
     'string.base': 'Password must be of type string',
     'string.min': 'Invalid password',

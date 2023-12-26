@@ -6,8 +6,6 @@ type IJoiDecorator = (target: any, key: string, descriptor: PropertyDescriptor) 
 
 export function joiValidation(schema: ObjectSchema): IJoiDecorator {
   return (_target: any, _key: string, descriptor: PropertyDescriptor) => {
-    console.log('voday');
-
     const originalMethod = descriptor.value;
 
     descriptor.value = async function (...args: any[]) {

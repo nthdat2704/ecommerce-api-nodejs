@@ -1,5 +1,6 @@
 import dotenv from 'dotenv';
-import { DataSource, DatabaseType } from 'typeorm';
+import { Secret } from 'jsonwebtoken';
+import { DatabaseType } from 'typeorm';
 dotenv.config();
 class Config {
   public readonly SERVER_PORT: string | undefined;
@@ -13,6 +14,9 @@ class Config {
   public readonly DB_USERNAME: string | undefined;
   public readonly DB_PASSWORD: string | undefined;
   public readonly DB_NAME: string | undefined;
+  public readonly SALT_ROUNDS: string | number;
+  public readonly ACCESS_TOKEN_SECRET_KEY: Secret;
+  public readonly REFRESH_TOKEN_SECRET_KEY: Secret;
 
   constructor() {
     this.SERVER_PORT = process.env.SERVER_PORT;
@@ -26,6 +30,9 @@ class Config {
     this.DB_USERNAME = process.env.DB_USERNAME;
     this.DB_PASSWORD = process.env.DB_PASSWORD;
     this.DB_NAME = process.env.DB_NAME;
+    this.SALT_ROUNDS = process.env.SALT_ROUNDS as string | number;
+    this.ACCESS_TOKEN_SECRET_KEY = process.env.ACCESS_TOKEN_SECRET_KEY as Secret;
+    this.REFRESH_TOKEN_SECRET_KEY = process.env.REFRESH_TOKEN_SECRET_KEY as Secret;
   }
 }
 
