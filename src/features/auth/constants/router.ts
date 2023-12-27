@@ -1,3 +1,4 @@
 export const ROUTER = {
-  signup: '/sign-up'
+  signup: '/sign-up',
+  signin: '/sign-in'
 };

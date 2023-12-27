@@ -17,7 +17,7 @@ class SignUp {
     if (checkIfUserExist) {
       throw new BadRequestError(MESSAGE.invalidCredentials);
     }
-    const hashPasswordResult = await helpers.hashPassword(password, salt_rounds);
+    const hashPasswordResult = (await helpers.hashPassword(password, salt_rounds)) as string;
     const userData: IUserDataPayload = {
       userName: username,
       email,

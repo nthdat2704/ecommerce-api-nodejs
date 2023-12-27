@@ -4,4 +4,5 @@ import { Application } from 'express';
 
 export const setupAppRouter = (app: Application) => {
   app.use(BASE_PATH, authRouter.registerRouter());
+  app.use(BASE_PATH, authRouter.signInRouter());
 };

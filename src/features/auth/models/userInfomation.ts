@@ -1,7 +1,8 @@
 import { UserCart } from '@features/cart/models/userCart';
 import { Orders } from '@features/orders/models/orders';
 import { ProductReviews } from '@features/reviews/models/productReviews';
-import { Column, Entity, Index, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, Index, OneToMany, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { UserSession } from './sessions';
 
 @Index('user_infomation_userName_email_key', ['email', 'userName'], {
   unique: true
@@ -12,7 +13,7 @@ export class UserInfomation {
   @PrimaryGeneratedColumn({ type: 'integer', name: 'userId' })
   userId: number;
 
-  @Column('character varying', { name: 'userName', unique: true, length: 30 })
+  @Column('character varying', { name: 'userName', unique: true, nullable: false, length: 30 })
   userName: string;
 
   @Column('character varying', { name: 'userPassword', length: 255 })
@@ -45,8 +46,11 @@ export class UserInfomation {
   @Column('character varying', { name: 'avatar', nullable: true, length: 30 })
   avatar: string | null;
 
-  @Column('character varying', { name: 'refreshToken', nullable: true, length: 255 })
-  refreshToken: string | null;
+  // @Column('character varying', { name: 'refreshToken', nullable: true, length: 255 })
+  // refreshToken: string | null;
+
+  @OneToOne(() => UserSession, (userSession) => userSession.userName)
+  refreshToken: UserSession;
 
   @OneToMany(() => Orders, (orders) => orders.user)
   orders: Orders[];
