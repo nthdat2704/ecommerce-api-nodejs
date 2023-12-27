@@ -29,14 +29,22 @@ class AuthService {
       console.log('error:', error);
     }
   }
-  public async updateTokenToDB(userName: string, token: string) {
+  public async getTokenFromDB(username: string) {
     try {
-      const exitsingUserSession = await this.userSessionRepository.findOne({ where: { userName: userName } });
+      const result = await this.userSessionRepository.findOne({ where: { userName: username } });
+      return result;
+    } catch (error) {
+      console.log('error:', error);
+    }
+  }
+  public async updateTokenToDB(username: string, token: string | null) {
+    try {
+      const exitsingUserSession = await this.userSessionRepository.findOne({ where: { userName: username } });
       if (exitsingUserSession) {
-        const result = await this.userSessionRepository.update({ userName: userName }, { refreshToken: token });
+        const result = await this.userSessionRepository.update({ userName: username }, { refreshToken: token });
         return result;
       }
-      const result = await this.userSessionRepository.insert({ userName: userName, refreshToken: token });
+      const result = await this.userSessionRepository.insert({ userName: username, refreshToken: token });
       return result;
     } catch (error) {
       console.log('error:', error);

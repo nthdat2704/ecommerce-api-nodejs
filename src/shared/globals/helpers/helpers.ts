@@ -21,7 +21,18 @@ class Helpers {
     }
   }
   public createToken(payload: string | object | Buffer, secretKey: Secret, options: SignOptions | undefined) {
-    return jwt.sign(payload, secretKey, options);
+    try {
+      return jwt.sign(payload, secretKey, options);
+    } catch (error) {
+      console.log('error:', error);
+    }
+  }
+  public verifyToken(token: string, secretKey: Secret) {
+    try {
+      return jwt.verify(token, secretKey);
+    } catch (error) {
+      console.log('error:', error);
+    }
   }
 }
 export const helpers = new Helpers();

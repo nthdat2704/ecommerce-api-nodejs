@@ -1,4 +1,5 @@
 export const ROUTER = {
   signup: '/sign-up',
-  signin: '/sign-in'
+  signin: '/sign-in',
+  signout: '/sign-out'
 };

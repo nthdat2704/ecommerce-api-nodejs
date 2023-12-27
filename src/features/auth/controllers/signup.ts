@@ -31,6 +31,9 @@ class SignUp {
     }
     const accessToken = helpers.createToken({ userName: userData.userName }, config.ACCESS_TOKEN_SECRET_KEY, { expiresIn: '30s' });
     const refreshToken = helpers.createToken({ userName: userData.userName }, config.REFRESH_TOKEN_SECRET_KEY, { expiresIn: '24h' });
+    if (!refreshToken) {
+      throw new BadRequestError(MESSAGE.errorInsert);
+    }
     const updateRefreshTokenResult = await authService.updateTokenToDB(userData.userName, refreshToken);
     if (!updateRefreshTokenResult) {
       throw new BadRequestError(MESSAGE.errorInsert);

@@ -11,7 +11,7 @@ export class UserSession {
   tokenId: number;
 
   @Column('character varying', { name: 'refreshToken', nullable: true, length: 255 })
-  refreshToken: string;
+  refreshToken: string | null;
 
   @OneToOne(() => UserInfomation, (userInfomation) => userInfomation.refreshToken, { nullable: false })
   @JoinColumn([{ name: 'userName', referencedColumnName: 'userName' }])
