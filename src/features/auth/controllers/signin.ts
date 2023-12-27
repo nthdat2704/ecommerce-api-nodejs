@@ -19,7 +19,7 @@ class SignIn {
     if (!isCorrectPassword) {
       throw new NotAuthorizedError(MESSAGE.invalidCredentials);
     }
-    const accessToken = helpers.createToken({ userName: userData.userName }, config.ACCESS_TOKEN_SECRET_KEY, { expiresIn: '30s' });
+    const accessToken = helpers.createToken({ userName: userData.userName }, config.ACCESS_TOKEN_SECRET_KEY, { expiresIn: '5m' });
     const refreshToken = helpers.createToken({ userName: userData.userName }, config.REFRESH_TOKEN_SECRET_KEY, { expiresIn: '24h' });
     if (!refreshToken) {
       throw new BadRequestError(MESSAGE.errorInsert);
