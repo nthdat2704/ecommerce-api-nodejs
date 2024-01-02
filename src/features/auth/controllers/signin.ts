@@ -5,7 +5,7 @@ import { authService } from '@shared/services/db/auth.service';
 import { BadRequestError, NotAuthorizedError, NotFoundError } from '@shared/globals/helpers/error-handler';
 import { config } from '@/config';
 import { helpers } from '@shared/globals/helpers/helpers';
-import { MESSAGE } from '@shared/constants/error-message';
+import { MESSAGE } from '@shared/constants/message';
 import { signinSchema } from '../schemes/signin';
 class SignIn {
   @joiValidation(signinSchema)

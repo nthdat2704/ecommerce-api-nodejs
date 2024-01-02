@@ -7,7 +7,7 @@ import { BadRequestError } from '@shared/globals/helpers/error-handler';
 import { config } from '@/config';
 import { IUserDataPayload } from '../interfaces/auth.interface';
 import { helpers } from '@shared/globals/helpers/helpers';
-import { MESSAGE } from '@shared/constants/error-message';
+import { MESSAGE } from '@shared/constants/message';
 class SignUp {
   @joiValidation(signupSchema)
   public async create(req: Request, res: Response): Promise<void> {

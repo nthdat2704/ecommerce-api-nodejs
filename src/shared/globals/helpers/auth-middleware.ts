@@ -1,5 +1,5 @@
 import { config } from '@/config';
-import { MESSAGE } from '@shared/constants/error-message';
+import { MESSAGE } from '@shared/constants/message';
 import { TAccessToken } from '@shared/types/auth.interface';
 import { NextFunction, Request, Response } from 'express';
 import { BadRequestError, NotAuthorizedError } from './error-handler';
