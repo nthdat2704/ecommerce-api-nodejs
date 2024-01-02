@@ -1,7 +1,7 @@
 import { Router } from 'express';
-import { signupController } from '@features/auth/controllers/signup';
 import { ROUTER } from '../constants/router';
 import { mainCategoriesController } from '../controllers/mainCategories';
+import { authMiddleware } from '@shared/globals/helpers/auth-middleware';
 
 class CategoriesRouter {
   private router: Router;
@@ -9,10 +9,10 @@ class CategoriesRouter {
     this.router = Router();
   }
   public routers() {
-    this.router.post(ROUTER.createMainCategory, mainCategoriesController.create);
-    this.router.post(ROUTER.updateMainCategory, mainCategoriesController.update);
+    this.router.post(ROUTER.createMainCategory, authMiddleware.verifyAuthorization, mainCategoriesController.create);
+    this.router.post(ROUTER.updateMainCategory, authMiddleware.verifyAuthorization, mainCategoriesController.update);
     this.router.get(ROUTER.categories, mainCategoriesController.read);
-    this.router.post(ROUTER.deleteMainCategory, mainCategoriesController.delete);
+    this.router.post(ROUTER.deleteMainCategory, authMiddleware.verifyAuthorization, mainCategoriesController.delete);
     return this.router;
   }
 }
