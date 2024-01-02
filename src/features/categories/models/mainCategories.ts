@@ -13,7 +13,7 @@ export class MainCategories {
   @Column('character varying', { name: 'name', unique: true, length: 100 })
   name: string;
 
-  @Column('character varying', { name: 'slug', unique: true, length: 100 })
+  @Column('character varying', { name: 'slug', unique: true, length: 255 })
   slug: string;
 
   @Column('character varying', { name: 'icon', nullable: true, length: 255 })

@@ -1,14 +1,18 @@
 import { Router } from 'express';
-import { ROUTER } from '@features/auth/constants/router';
 import { signupController } from '@features/auth/controllers/signup';
+import { ROUTER } from '../constants/router';
+import { mainCategoriesController } from '../controllers/mainCategories';
 
 class CategoriesRouter {
   private router: Router;
   constructor() {
     this.router = Router();
   }
-  public registerRouter() {
-    this.router.post(ROUTER.signup, signupController.create);
+  public routers() {
+    this.router.post(ROUTER.createMainCategory, mainCategoriesController.create);
+    this.router.post(ROUTER.updateMainCategory, mainCategoriesController.update);
+    this.router.get(ROUTER.categories, mainCategoriesController.read);
+    this.router.post(ROUTER.deleteMainCategory, mainCategoriesController.delete);
     return this.router;
   }
 }
