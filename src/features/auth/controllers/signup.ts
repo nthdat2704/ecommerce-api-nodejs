@@ -29,8 +29,16 @@ class SignUp {
     if (!insertUserResult) {
       throw new BadRequestError(MESSAGE.errorInsert);
     }
-    const accessToken = helpers.createToken({ userName: userData.userName }, config.ACCESS_TOKEN_SECRET_KEY, { expiresIn: '30s' });
-    const refreshToken = helpers.createToken({ userName: userData.userName }, config.REFRESH_TOKEN_SECRET_KEY, { expiresIn: '24h' });
+    const accessToken = helpers.createToken(
+      { userName: insertUserResult.userName, isAdmin: insertUserResult.isAdmin },
+      config.ACCESS_TOKEN_SECRET_KEY,
+      { expiresIn: '5m' }
+    );
+    const refreshToken = helpers.createToken(
+      { userName: insertUserResult.userName, isAdmin: insertUserResult.isAdmin },
+      config.REFRESH_TOKEN_SECRET_KEY,
+      { expiresIn: '24h' }
+    );
     if (!refreshToken) {
       throw new BadRequestError(MESSAGE.errorInsert);
     }

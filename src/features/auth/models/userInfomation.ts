@@ -45,9 +45,8 @@ export class UserInfomation {
 
   @Column('character varying', { name: 'avatar', nullable: true, length: 30 })
   avatar: string | null;
-
-  // @Column('character varying', { name: 'refreshToken', nullable: true, length: 255 })
-  // refreshToken: string | null;
+  @Column('boolean', { name: 'isAdmin', default: () => 'false' })
+  isAdmin: boolean;
 
   @OneToOne(() => UserSession, (userSession) => userSession.userName)
   refreshToken: UserSession;

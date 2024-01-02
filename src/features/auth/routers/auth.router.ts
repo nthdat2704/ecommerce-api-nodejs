@@ -9,15 +9,9 @@ class AuthRouter {
   constructor() {
     this.router = Router();
   }
-  public signUpRouter() {
+  public routers() {
     this.router.post(ROUTER.signup, signupController.create);
-    return this.router;
-  }
-  public signInRouter() {
     this.router.post(ROUTER.signin, signinController.read);
-    return this.router;
-  }
-  public signOutRouter() {
     this.router.post(ROUTER.signout, signoutController.delete);
     return this.router;
   }

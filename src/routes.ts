@@ -4,8 +4,6 @@ import { BASE_PATH } from '@shared/constants/router';
 import { Application } from 'express';
 
 export const setupAppRouter = (app: Application) => {
-  app.use(BASE_PATH, authRouter.signUpRouter());
-  app.use(BASE_PATH, authRouter.signInRouter());
-  app.use(BASE_PATH, authRouter.signOutRouter());
+  app.use(BASE_PATH, authRouter.routers());
   app.use(BASE_PATH, categoriesRouter.routers());
 };

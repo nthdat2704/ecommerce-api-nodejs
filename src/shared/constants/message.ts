@@ -18,5 +18,6 @@ export const MESSAGE = {
   successQuery: 'Query successful',
   successUpdate: 'Update successful',
   successdelete: 'Delete successful',
-  categoryExists: 'Category name already exists.'
+  categoryExists: 'Category name already exists.',
+  accessDenied: 'You do not have permission to access this page.'
 };

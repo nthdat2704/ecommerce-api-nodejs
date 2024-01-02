@@ -18,6 +18,22 @@ class AuthMiddleware {
     }
     next();
   }
+  public verifyAuthorization(req: Request, res: Response, next: NextFunction): void {
+    const plainAccessToken = req.headers.authorization;
+    if (!plainAccessToken) {
+      throw new BadRequestError(MESSAGE.invalidTokenOrExpired);
+    }
+    const accessToken = plainAccessToken.split(' ')[1];
+    const verifyAccessToken = helpers.verifyToken(accessToken, config.ACCESS_TOKEN_SECRET_KEY) as TAccessToken;
+    if (!verifyAccessToken) {
+      throw new NotAuthorizedError(MESSAGE.invalidTokenOrExpired);
+    }
+    const { isAdmin } = verifyAccessToken;
+    if (!isAdmin) {
+      throw new NotAuthorizedError(MESSAGE.accessDenied);
+    }
+    next();
+  }
 }
 
 export const authMiddleware: AuthMiddleware = new AuthMiddleware();

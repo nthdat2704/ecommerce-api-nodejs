@@ -23,7 +23,7 @@ class AuthService {
   }
   public async addUserToDB(userData: IUserDataPayload) {
     try {
-      const result = await this.userRepository.insert(userData);
+      const result = await this.userRepository.save(userData);
       return result;
     } catch (error) {
       console.log('error:', error);
@@ -44,7 +44,7 @@ class AuthService {
         const result = await this.userSessionRepository.update({ userName: username }, { refreshToken: token });
         return result;
       }
-      const result = await this.userSessionRepository.insert({ userName: username, refreshToken: token });
+      const result = await this.userSessionRepository.save({ userName: username, refreshToken: token });
       return result;
     } catch (error) {
       console.log('error:', error);
