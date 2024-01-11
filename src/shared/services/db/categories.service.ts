@@ -3,7 +3,7 @@ import { MainCategories } from '@features/categories/models/mainCategories';
 import { SubCategories } from '@features/categories/models/subCategories';
 import { SubSubCategories } from '@features/categories/models/subSubCategories';
 import { TCategoryTypePayload } from '@shared/types/categories.interface';
-import { InsertResult, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 
 class CategoriesService {
   private mainCategoriesRepository: Repository<MainCategories>;
@@ -130,7 +130,7 @@ class CategoriesService {
   }
   public async updateCategory(
     categoryId: number,
-    payload: Partial<MainCategories> | SubCategories | SubSubCategories,
+    payload: Partial<MainCategories> | Partial<SubCategories> | Partial<SubSubCategories>,
     type: TCategoryTypePayload = 'main'
   ) {
     if (type === 'sub') {

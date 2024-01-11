@@ -7,7 +7,7 @@ import { joiValidation } from '@shared/globals/decorators/joi-validation.decorat
 import { MainCategories as MainCategoriesModel } from '../models/mainCategories';
 import { mainCategorySchema } from '../schemes/categories';
 import { ISuccessResponse } from '@shared/types/common';
-import { IMainCategoriesData } from '../interfaces/categories.interface';
+import { ICategoriesData } from '../interfaces/categories.interface';
 import { STATUS } from '@shared/constants/status';
 class MainCategories {
   @joiValidation(mainCategorySchema)
@@ -22,7 +22,7 @@ class MainCategories {
     if (!createdCategory) {
       throw new BadRequestError(MESSAGE.errorInsert);
     }
-    const responseData: ISuccessResponse<IMainCategoriesData<MainCategoriesModel>> = {
+    const responseData: ISuccessResponse<ICategoriesData<MainCategoriesModel>> = {
       statusCode: 200,
       message: MESSAGE.createdSuccess,
       status: STATUS.success,
@@ -39,7 +39,7 @@ class MainCategories {
     if (!categories) {
       throw new BadRequestError(MESSAGE.errorQuery);
     }
-    const responseData: ISuccessResponse<IMainCategoriesData<MainCategoriesModel[]>> = {
+    const responseData: ISuccessResponse<ICategoriesData<MainCategoriesModel[]>> = {
       statusCode: 200,
       message: MESSAGE.successQuery,
       status: STATUS.success,
@@ -66,9 +66,9 @@ class MainCategories {
     if (!isUpdateSuccess) {
       throw new BadRequestError(MESSAGE.updateFail);
     }
-    const updatedCategory = await categoriesService.getCategoryById(isUpdateSuccess.affected!);
+    const updatedCategory = await categoriesService.getCategoryById(mainCategoryId);
 
-    const responseData: ISuccessResponse<IMainCategoriesData<MainCategoriesModel | null>> = {
+    const responseData: ISuccessResponse<ICategoriesData<MainCategoriesModel | null>> = {
       statusCode: 200,
       message: MESSAGE.successUpdate,
       status: STATUS.success,
@@ -94,7 +94,7 @@ class MainCategories {
       throw new BadRequestError(MESSAGE.deleteFail);
     }
     const listCategories = (await categoriesService.getAllCategoriesByType('main')) || [];
-    const responseData: ISuccessResponse<IMainCategoriesData<MainCategoriesModel[] | []>> = {
+    const responseData: ISuccessResponse<ICategoriesData<MainCategoriesModel[] | []>> = {
       statusCode: 200,
       message: MESSAGE.successdelete,
       status: STATUS.success,
