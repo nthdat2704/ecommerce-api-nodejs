@@ -35,7 +35,7 @@ class MainCategories {
     res.status(HTTP_STATUS.CREATED).json(responseData);
   }
   public async read(req: Request, res: Response): Promise<void> {
-    const categories = await categoriesService.getAllCategories('main');
+    const categories = await categoriesService.getAllCategoriesByType('main');
     if (!categories) {
       throw new BadRequestError(MESSAGE.errorQuery);
     }
@@ -93,7 +93,7 @@ class MainCategories {
     if (!isDeletedSuccess) {
       throw new BadRequestError(MESSAGE.deleteFail);
     }
-    const listCategories = (await categoriesService.getAllCategories('main')) || [];
+    const listCategories = (await categoriesService.getAllCategoriesByType('main')) || [];
     const responseData: ISuccessResponse<IMainCategoriesData<MainCategoriesModel[] | []>> = {
       statusCode: 200,
       message: MESSAGE.successdelete,

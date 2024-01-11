@@ -14,7 +14,15 @@ class CategoriesService {
     this.subCategoriesRepository = myShopDataSource.getRepository(SubCategories);
     this.subSubCategoriesRepository = myShopDataSource.getRepository(SubSubCategories);
   }
-  public async getAllCategories(
+  public async getCategories() {
+    try {
+      const categories = await this.mainCategoriesRepository.find({ relations: ['subCategories.subSubCategories'] });
+      return categories;
+    } catch (error) {
+      console.log('error:', error);
+    }
+  }
+  public async getAllCategoriesByType(
     type: TCategoryTypePayload = 'main'
   ): Promise<MainCategories[] | SubCategories[] | SubSubCategories[] | undefined> {
     if (type === 'sub') {
