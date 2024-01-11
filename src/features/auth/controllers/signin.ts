@@ -20,7 +20,7 @@ class SignIn {
       throw new NotAuthorizedError(MESSAGE.invalidCredentials);
     }
     const accessToken = helpers.createToken({ userName: userData.userName, isAdmin: userData.isAdmin }, config.ACCESS_TOKEN_SECRET_KEY, {
-      expiresIn: '5m'
+      expiresIn: '30m'
     });
     const refreshToken = helpers.createToken({ userName: userData.userName, isAdmin: userData.isAdmin }, config.REFRESH_TOKEN_SECRET_KEY, {
       expiresIn: '24h'
