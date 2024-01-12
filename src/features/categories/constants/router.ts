@@ -9,5 +9,10 @@ export const ROUTER = {
   subCategories: '/sub-categories',
   createSubCategory: '/create-sub-category',
   updateSubCategory: '/update-sub-category',
-  deleteSubCategory: '/delete-sub-category'
+  deleteSubCategory: '/delete-sub-category',
+
+  subSubCategories: '/subsub-categories',
+  createSubSubCategory: '/create-subsub-category',
+  updateSubSubCategory: '/update-subsub-category',
+  deleteSubSubCategory: '/delete-subsub-category'
 };

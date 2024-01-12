@@ -64,7 +64,7 @@ class CategoriesService {
     if (type === 'subsub') {
       try {
         const subsubCategoryPayload = payload as SubSubCategories;
-        const subsubCategoryResult = await this.subCategoriesRepository.save(subsubCategoryPayload);
+        const subsubCategoryResult = await this.subSubCategoriesRepository.save(subsubCategoryPayload);
         return subsubCategoryResult;
       } catch (error) {
         console.log('error:', error);
@@ -167,7 +167,7 @@ class CategoriesService {
     }
     if (type === 'subsub') {
       try {
-        const deleteResult = await this.subCategoriesRepository.delete(categoryId);
+        const deleteResult = await this.subSubCategoriesRepository.delete(categoryId);
         return deleteResult;
       } catch (error) {
         console.log('error:', error);

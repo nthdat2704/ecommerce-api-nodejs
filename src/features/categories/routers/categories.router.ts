@@ -4,6 +4,7 @@ import { mainCategoriesController } from '../controllers/mainCategories';
 import { authMiddleware } from '@shared/globals/helpers/auth-middleware';
 import { categoriesController } from '../controllers/categories';
 import { subCategoriesController } from '../controllers/subCategories';
+import { subSubCategoriesController } from '../controllers/subSubCategories';
 
 class CategoriesRouter {
   private router: Router;
@@ -22,6 +23,11 @@ class CategoriesRouter {
     this.router.get(ROUTER.subCategories, subCategoriesController.read);
     this.router.post(ROUTER.updateSubCategory, authMiddleware.verifyAuthorization, subCategoriesController.update);
     this.router.post(ROUTER.deleteSubCategory, authMiddleware.verifyAuthorization, subCategoriesController.delete);
+
+    this.router.post(ROUTER.createSubSubCategory, authMiddleware.verifyAuthorization, subSubCategoriesController.create);
+    this.router.get(ROUTER.subSubCategories, subSubCategoriesController.read);
+    this.router.post(ROUTER.updateSubSubCategory, authMiddleware.verifyAuthorization, subSubCategoriesController.update);
+    this.router.post(ROUTER.deleteSubSubCategory, authMiddleware.verifyAuthorization, subSubCategoriesController.delete);
     return this.router;
   }
 }
