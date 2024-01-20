@@ -1,3 +1,6 @@
 export const ROUTER = {
-  brands: '/brands'
+  brands: '/brands',
+  createBrand: '/create-brand',
+  updateBrand: '/update-brand',
+  deleteBrand: '/delete-brand'
 };

@@ -14,7 +14,7 @@ export class Brands {
   @Column('character varying', { name: 'name', unique: true, length: 100 })
   name: string;
 
-  @Column('character varying', { name: 'slug', length: 100 })
+  @Column('character varying', { name: 'slug', unique: true, length: 100 })
   slug: string;
 
   @Column('character varying', { name: 'logo', nullable: true, length: 255 })
