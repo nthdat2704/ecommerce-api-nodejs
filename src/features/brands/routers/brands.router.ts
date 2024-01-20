@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { ROUTER } from '../constants/router';
 import { brandsController } from '../controllers/brands';
+import { authMiddleware } from '@shared/globals/helpers/auth-middleware';
 
 class BrandsRouter {
   private router: Router;
@@ -8,10 +9,10 @@ class BrandsRouter {
     this.router = Router();
   }
   public routers() {
-    this.router.post(ROUTER.createBrand, brandsController.create);
-    this.router.post(ROUTER.updateBrand, brandsController.update),
+    this.router.post(ROUTER.createBrand, authMiddleware.verifyAuthorization, brandsController.create);
+    this.router.post(ROUTER.updateBrand, authMiddleware.verifyAuthorization, brandsController.update),
       this.router.get(ROUTER.brands, brandsController.read),
-      this.router.post(ROUTER.deleteBrand, brandsController.delete);
+      this.router.post(ROUTER.deleteBrand, authMiddleware.verifyAuthorization, brandsController.delete);
     return this.router;
   }
 }
