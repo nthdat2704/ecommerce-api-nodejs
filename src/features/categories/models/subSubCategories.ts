@@ -1,8 +1,9 @@
 import { Column, Entity, Index, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
-import { SubCategories } from './subCategories';
 import { Brands } from '@features/brands/models/brands';
-import { MainProductInfo } from '@features/products/models/mainProductInfo';
+import { LaptopTechnicalspecsInfo } from '@features/products/models/laptopTechnicalspecsInfo';
+import { PhoneTechnicalspecsInfo } from '@features/products/models/phoneTechnicalspecsInfo';
+import { SubCategories } from './subCategories';
 
 @Index('sub_sub_categories_name_slug_key', ['name', 'slug'], { unique: true })
 @Index('sub-sub_categories_pkey', ['subSubCategoryId'], { unique: true })
@@ -26,8 +27,11 @@ export class SubSubCategories {
   @OneToMany(() => Brands, (brands) => brands.subSubCategory)
   brands: Brands[];
 
-  @OneToMany(() => MainProductInfo, (mainProductInfo) => mainProductInfo.subSubCategory)
-  mainProductInfos: MainProductInfo[];
+  @OneToMany(() => LaptopTechnicalspecsInfo, (laptopInfo) => laptopInfo.subSubCategory)
+  laptopInfo: LaptopTechnicalspecsInfo[];
+
+  @OneToMany(() => PhoneTechnicalspecsInfo, (phoneInfo) => phoneInfo.subSubCategory)
+  phoneInfo: PhoneTechnicalspecsInfo[];
 
   @ManyToOne(() => SubCategories, (subCategories) => subCategories.subSubCategories)
   @JoinColumn([{ name: 'subCategoryId', referencedColumnName: 'subCategoryId' }])

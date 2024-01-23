@@ -1,5 +1,6 @@
 import { UserInfomation } from '@features/auth/models/userInfomation';
-import { MainProductInfo } from '@features/products/models/mainProductInfo';
+import { LaptopTechnicalspecsInfo } from '@features/products/models/laptopTechnicalspecsInfo';
+import { PhoneTechnicalspecsInfo } from '@features/products/models/phoneTechnicalspecsInfo';
 import { Column, Entity, Index, JoinColumn, ManyToOne } from 'typeorm';
 
 @Index('user_cart_pkey', ['cartId'], { unique: true })
@@ -11,9 +12,11 @@ export class UserCart {
   @Column('integer', { name: 'amount', default: () => '1' })
   amount: number;
 
-  @ManyToOne(() => MainProductInfo, (mainProductInfo) => mainProductInfo.userCarts)
-  @JoinColumn([{ name: 'mainProductId', referencedColumnName: 'mainProductId' }])
-  mainProduct: MainProductInfo;
+  @ManyToOne(() => LaptopTechnicalspecsInfo, (laptopInfo) => laptopInfo.userCarts)
+  @ManyToOne(() => PhoneTechnicalspecsInfo, (phoneInfo) => phoneInfo.userCarts)
+  @JoinColumn([{ name: 'productId', referencedColumnName: 'productId' }])
+  laptopInfo: LaptopTechnicalspecsInfo;
+  phoneInfo: PhoneTechnicalspecsInfo;
 
   @ManyToOne(() => UserInfomation, (userInfomation) => userInfomation.userCarts)
   @JoinColumn([{ name: 'userId', referencedColumnName: 'userId' }])

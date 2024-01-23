@@ -1,7 +1,8 @@
+import { Brands } from '@features/brands/models/brands';
+import { LaptopTechnicalspecsInfo } from '@features/products/models/laptopTechnicalspecsInfo';
+import { PhoneTechnicalspecsInfo } from '@features/products/models/phoneTechnicalspecsInfo';
 import { Column, Entity, Index, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { SubCategories } from './subCategories';
-import { MainProductInfo } from '@features/products/models/mainProductInfo';
-import { Brands } from '@features/brands/models/brands';
 
 @Index('main_categories_pkey', ['mainCategoryId'], { unique: true })
 @Index('main_categories_name_slug_key', ['name', 'slug'], { unique: true })
@@ -25,8 +26,11 @@ export class MainCategories {
   @OneToMany(() => Brands, (brands) => brands.mainCategory)
   brands: Brands[];
 
-  @OneToMany(() => MainProductInfo, (mainProductInfo) => mainProductInfo.mainCategory)
-  mainProductInfos: MainProductInfo[];
+  @OneToMany(() => LaptopTechnicalspecsInfo, (laptopInfo) => laptopInfo.mainCategory)
+  laptopInfo: LaptopTechnicalspecsInfo[];
+
+  @OneToMany(() => PhoneTechnicalspecsInfo, (phoneInfo) => phoneInfo.mainCategory)
+  phoneInfo: PhoneTechnicalspecsInfo[];
 
   @OneToMany(() => SubCategories, (subCategories) => subCategories.mainCategory)
   subCategories: SubCategories[];

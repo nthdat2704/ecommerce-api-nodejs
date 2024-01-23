@@ -1,18 +1,14 @@
-import { Column, Entity, Index, JoinColumn, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { MainProductInfo } from './mainProductInfo';
-
-@Index('phone_technicalspecs _info_main_product_id_key', ['mainProductId'], {
-  unique: true
-})
-@Index('phone_technicalspecs _info_pkey', ['phoneId'], { unique: true })
+import { Brands } from '@features/brands/models/brands';
+import { UserCart } from '@features/cart/models/userCart';
+import { MainCategories } from '@features/categories/models/mainCategories';
+import { SubCategories } from '@features/categories/models/subCategories';
+import { SubSubCategories } from '@features/categories/models/subSubCategories';
+import { Orders } from '@features/orders/models/orders';
+import { ProductReviews } from '@features/reviews/models/productReviews';
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
+import { BaseProductInfo } from './baseProductInfo';
 @Entity('phone_technicalspecs _info', { schema: 'public' })
-export class PhoneTechnicalspecsInfo {
-  @PrimaryGeneratedColumn({ type: 'integer', name: 'phoneId' })
-  phoneId: number;
-
-  @Column('integer', { name: 'mainProductId', unique: true })
-  mainProductId: number;
-
+export class PhoneTechnicalspecsInfo extends BaseProductInfo {
   @Column('character varying', { name: 'screenTech', length: 255 })
   screenTech: string;
 
@@ -133,7 +129,28 @@ export class PhoneTechnicalspecsInfo {
   @Column('character varying', { name: 'generalBrand', length: 255 })
   generalBrand: string;
 
-  @OneToOne(() => MainProductInfo, (mainProductInfo) => mainProductInfo.phoneTechnicalspecsInfo)
-  @JoinColumn([{ name: 'mainProductId', referencedColumnName: 'mainProductId' }])
-  mainProduct: MainProductInfo;
+  @ManyToOne(() => MainCategories, (mainCategories) => mainCategories.phoneInfo)
+  @JoinColumn([{ name: 'mainCategoryId', referencedColumnName: 'mainCategoryId' }])
+  mainCategory: MainCategories;
+
+  @ManyToOne(() => SubCategories, (subCategories) => subCategories.phoneInfo)
+  @JoinColumn([{ name: 'subCategoryId', referencedColumnName: 'subCategoryId' }])
+  subCategory: SubCategories;
+
+  @ManyToOne(() => SubSubCategories, (subSubCategories) => subSubCategories.phoneInfo)
+  @JoinColumn([{ name: 'subSubCategoryId', referencedColumnName: 'subSubCategoryId' }])
+  subSubCategory: SubSubCategories;
+
+  @OneToMany(() => Orders, (orders) => orders.phoneInfo)
+  orders: Orders[];
+
+  @OneToMany(() => ProductReviews, (productReviews) => productReviews.phoneInfo)
+  productReviews: ProductReviews[];
+
+  @OneToMany(() => UserCart, (userCart) => userCart.phoneInfo)
+  userCarts: UserCart[];
+
+  @ManyToOne(() => Brands, (brands) => brands.phoneInfo)
+  @JoinColumn([{ name: 'brandId', referencedColumnName: 'brandId' }])
+  brand: Brands;
 }

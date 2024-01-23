@@ -1,18 +1,14 @@
-import { Column, Entity, Index, JoinColumn, OneToOne } from 'typeorm';
-import { MainProductInfo } from './mainProductInfo';
-
-@Index('laptop_technicalspecs_info_pkey', ['laptopId'], { unique: true })
-@Index('laptop_technicalspecs_info_main_product_id_key', ['mainProductId'], {
-  unique: true
-})
+import { Brands } from '@features/brands/models/brands';
+import { UserCart } from '@features/cart/models/userCart';
+import { MainCategories } from '@features/categories/models/mainCategories';
+import { SubCategories } from '@features/categories/models/subCategories';
+import { SubSubCategories } from '@features/categories/models/subSubCategories';
+import { Orders } from '@features/orders/models/orders';
+import { ProductReviews } from '@features/reviews/models/productReviews';
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
+import { BaseProductInfo } from './baseProductInfo';
 @Entity('laptop_technicalspecs_info', { schema: 'public' })
-export class LaptopTechnicalspecsInfo {
-  @Column('integer', { primary: true, name: 'laptopId' })
-  laptopId: number;
-
-  @Column('integer', { name: 'mainProductId', unique: true })
-  mainProductId: number;
-
+export class LaptopTechnicalspecsInfo extends BaseProductInfo {
   @Column('character varying', { name: 'cpuTech', length: 255 })
   cpuTech: string;
 
@@ -94,7 +90,28 @@ export class LaptopTechnicalspecsInfo {
   @Column('character varying', { name: 'othersReleasedate', length: 255 })
   othersReleasedate: string;
 
-  @OneToOne(() => MainProductInfo, (mainProductInfo) => mainProductInfo.laptopTechnicalspecsInfo)
-  @JoinColumn([{ name: 'mainProductId', referencedColumnName: 'mainProductId' }])
-  mainProduct: MainProductInfo;
+  @ManyToOne(() => MainCategories, (mainCategories) => mainCategories.laptopInfo)
+  @JoinColumn([{ name: 'mainCategoryId', referencedColumnName: 'mainCategoryId' }])
+  mainCategory: MainCategories;
+
+  @ManyToOne(() => SubCategories, (subCategories) => subCategories.laptopInfo)
+  @JoinColumn([{ name: 'subCategoryId', referencedColumnName: 'subCategoryId' }])
+  subCategory: SubCategories;
+
+  @ManyToOne(() => SubSubCategories, (subSubCategories) => subSubCategories.laptopInfo)
+  @JoinColumn([{ name: 'subSubCategoryId', referencedColumnName: 'subSubCategoryId' }])
+  subSubCategory: SubSubCategories;
+
+  @OneToMany(() => Orders, (orders) => orders.laptopInfo)
+  orders: Orders[];
+
+  @OneToMany(() => ProductReviews, (productReviews) => productReviews.laptopInfo)
+  productReviews: ProductReviews[];
+
+  @OneToMany(() => UserCart, (userCart) => userCart.laptopInfo)
+  userCarts: UserCart[];
+
+  @ManyToOne(() => Brands, (brands) => brands.laptopInfo)
+  @JoinColumn([{ name: 'brandId', referencedColumnName: 'brandId' }])
+  brand: Brands;
 }

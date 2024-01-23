@@ -1,5 +1,6 @@
 import { UserInfomation } from '@features/auth/models/userInfomation';
-import { MainProductInfo } from '@features/products/models/mainProductInfo';
+import { LaptopTechnicalspecsInfo } from '@features/products/models/laptopTechnicalspecsInfo';
+import { PhoneTechnicalspecsInfo } from '@features/products/models/phoneTechnicalspecsInfo';
 import { Column, Entity, Index, JoinColumn, ManyToOne } from 'typeorm';
 
 @Index('orders_pkey', ['orderId'], { unique: true })
@@ -51,9 +52,11 @@ export class Orders {
   @Column('timestamp without time zone', { name: 'createdAt' })
   createdAt: Date;
 
-  @ManyToOne(() => MainProductInfo, (mainProductInfo) => mainProductInfo.orders)
-  @JoinColumn([{ name: 'mainProductId', referencedColumnName: 'mainProductId' }])
-  mainProduct: MainProductInfo;
+  @ManyToOne(() => LaptopTechnicalspecsInfo, (laptopInfo) => laptopInfo.orders)
+  @ManyToOne(() => PhoneTechnicalspecsInfo, (phoneInfo) => phoneInfo.orders)
+  @JoinColumn([{ name: 'productId', referencedColumnName: 'productId' }])
+  laptopInfo: LaptopTechnicalspecsInfo;
+  phoneInfo: PhoneTechnicalspecsInfo;
 
   @ManyToOne(() => UserInfomation, (userInfomation) => userInfomation.orders)
   @JoinColumn([{ name: 'userId', referencedColumnName: 'userId' }])
