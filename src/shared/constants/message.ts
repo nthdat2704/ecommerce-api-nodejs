@@ -9,6 +9,7 @@ export const MESSAGE = {
   dataNotFound: 'Requested data not found in the database. Please ensure the provided identifier is correct and try again.',
   invalidCategoryId: 'Invalid or missing categoryId. Please provide a valid categoryId.',
   invalidBrandId: 'Invalid or missing BrandId. Please provide a valid BrandId.',
+  invalidProductId: 'Invalid or missing ProductId. Please provide a valid ProductId.',
   invalidData:
     'Data sent to the server is not in the correct format. Please ensure you provide the required fields in the expected format.',
   invalidRefreshTokenOrExpired: 'The refresh token provided is invalid or has expired.',
@@ -21,6 +22,8 @@ export const MESSAGE = {
   successdelete: 'Delete successful',
   categoryExists: 'Category name already exists.',
   brandExists: 'Brand name already exists.',
+  productExists: 'Product name already exists.',
+  brandIdNotFound: 'Brand Id not found or missing',
   categoryIdNotFound: 'Category Id not found or missing',
   accessDenied: 'You do not have permission to access this page.'
 };

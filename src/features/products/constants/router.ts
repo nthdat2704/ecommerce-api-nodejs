@@ -1,3 +1,6 @@
 export const ROUTER = {
-  products: '/products'
+  laptops: '/laptops',
+  createLaptop: '/create-laptop',
+  updatelaptop: '/update-laptop',
+  deletelaptop: '/delete-laptop'
 };

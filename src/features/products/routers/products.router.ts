@@ -1,14 +1,17 @@
 import { Router } from 'express';
-import { ROUTER } from '@features/auth/constants/router';
-import { signupController } from '@features/auth/controllers/signup';
+import { ROUTER } from '../constants/router';
+import { laptopsController } from '../controllers/laptop';
 
 class ProductsRouter {
   private router: Router;
   constructor() {
     this.router = Router();
   }
-  public registerRouter() {
-    this.router.post(ROUTER.signup, signupController.create);
+  public routers() {
+    this.router.post(ROUTER.createLaptop, laptopsController.create);
+    this.router.post(ROUTER.updatelaptop, laptopsController.update);
+    this.router.get(ROUTER.laptops, laptopsController.read);
+    this.router.post(ROUTER.deletelaptop, laptopsController.delete);
     return this.router;
   }
 }

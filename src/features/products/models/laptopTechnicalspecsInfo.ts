@@ -113,5 +113,5 @@ export class LaptopTechnicalspecsInfo extends BaseProductInfo {
 
   @ManyToOne(() => Brands, (brands) => brands.laptopInfo)
   @JoinColumn([{ name: 'brandId', referencedColumnName: 'brandId' }])
-  brand: Brands;
+  brand: Brands | number;
 }
