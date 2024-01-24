@@ -32,7 +32,7 @@ class SignUp {
     const accessToken = helpers.createToken(
       { userName: insertUserResult.userName, isAdmin: insertUserResult.isAdmin },
       config.ACCESS_TOKEN_SECRET_KEY,
-      { expiresIn: '5m' }
+      { expiresIn: '30m' }
     );
     const refreshToken = helpers.createToken(
       { userName: insertUserResult.userName, isAdmin: insertUserResult.isAdmin },
